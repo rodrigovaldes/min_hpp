@@ -1,4 +1,4 @@
-# source: https://www.geeksforgeeks.org/flask-creating-first-simple-application/
+# zero to hero inspiration: https://www.geeksforgeeks.org/flask-creating-first-simple-application/
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_apscheduler import APScheduler
