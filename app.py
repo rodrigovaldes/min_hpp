@@ -20,17 +20,29 @@ app.config['SQLALCHEMY_DATABASE_URI'] = uri
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-if not app.debug:
-    # Configure the scheduler
-    scheduler = APScheduler()
-    scheduler.add_job(func=print_message, trigger='interval', minutes=1, id='printer')
-    # scheduler.add_job(func=print_message,
-    #                     trigger='cron',
-    #                     day_of_week='mon-sun',
-    #                     hour=21,
-    #                     minute=50,git
-    #                     id='printer')
-    scheduler.start()
+# Configure the scheduler
+scheduler = APScheduler()
+scheduler.add_job(func=print_message, trigger='interval', seconds=5, id='printer')
+# scheduler.add_job(func=print_message,
+#                     trigger='cron',
+#                     day_of_week='mon-sun',
+#                     hour=21,
+#                     minute=50,git
+#                     id='printer')
+scheduler.start()
+
+
+# if not app.debug:
+#     # Configure the scheduler
+#     scheduler = APScheduler()
+#     scheduler.add_job(func=print_message, trigger='interval', seconds=5, id='printer')
+#     # scheduler.add_job(func=print_message,
+#     #                     trigger='cron',
+#     #                     day_of_week='mon-sun',
+#     #                     hour=21,
+#     #                     minute=50,git
+#     #                     id='printer')
+#     scheduler.start()
 
 @app.route('/')
 def index():
@@ -58,5 +70,5 @@ class Card(db.Model):
     min_transactions = db.Column(db.Integer)
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', use_reloader=False)
-    # app.run(debug=False, host='0.0.0.0')
+    app.run(debug=True)
+    # app.run(debug=False, host='0.0.0.0', use_reloader=False) ## most reliable, theoretically
