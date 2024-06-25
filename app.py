@@ -22,7 +22,7 @@ migrate = Migrate(app, db)
 
 # Configure the scheduler
 scheduler = APScheduler()
-scheduler.add_job(func=print_message, trigger='interval', seconds=2, id='printer')
+scheduler.add_job(func=print_message, trigger='interval', minutes=1, id='printer')
 # scheduler.add_job(func=print_message,
 #                     trigger='cron',
 #                     day_of_week='mon-sun',
