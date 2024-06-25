@@ -20,16 +20,17 @@ app.config['SQLALCHEMY_DATABASE_URI'] = uri
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-# Configure the scheduler
-scheduler = APScheduler()
-scheduler.add_job(func=print_message, trigger='interval', minutes=1, id='printer')
-# scheduler.add_job(func=print_message,
-#                     trigger='cron',
-#                     day_of_week='mon-sun',
-#                     hour=21,
-#                     minute=50,
-#                     id='printer')
-scheduler.start()
+if not app.debug:
+    # Configure the scheduler
+    scheduler = APScheduler()
+    scheduler.add_job(func=print_message, trigger='interval', minutes=1, id='printer')
+    # scheduler.add_job(func=print_message,
+    #                     trigger='cron',
+    #                     day_of_week='mon-sun',
+    #                     hour=21,
+    #                     minute=50,git
+    #                     id='printer')
+    scheduler.start()
 
 @app.route('/')
 def index():

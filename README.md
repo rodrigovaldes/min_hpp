@@ -45,4 +45,14 @@ DATABASE_URL=postgresql://{username}:{password}@localhost:5432/{dbname}
 `web: gunicorn app:app`
 NOTE: the first app is the name of your master file, like main, app, or so
 
+## How to avoid the scheduler to run twice?
+Theorethically, either `app.run(use_reloader=False)` or `app.run(debug=False)`
+
+However, it does not always work. As an alternative, in the main app.py file
+```
+if app.debug == False:
+    # configure the scheduler
+```
+
+More information here [https://github.com/viniciuschiele/flask-apscheduler/issues/139]
 
