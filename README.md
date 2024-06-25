@@ -50,12 +50,6 @@ For local deployment, theorethically, either `app.run(use_reloader=False)` or `a
 
 However, it does not always work. 
 
-For lacally deployment, in the main app.py file
-```
-if app.debug == False:
-    # configure the scheduler
-```
-
 For deployment in Heroku, none of the above work.
 The solution is adding preload to the Procfile, like this:
 `web: gunicorn app:app --preload`
