@@ -36,4 +36,13 @@ DATABASE_URL=postgresql://{username}:{password}@localhost:5432/{dbname}
 ## Install the SQLAlchemy
 `pip3 install Flask-SQLAlchemy`
 
+## Remember that all apps going to heroku need gnicorn
+`pip3 install gunicorn`
+
+## Add the Procfile (only used for Heroku)
+`touch Procfile`
++ Inside the Procfile add
+`web: gunicorn app:app`
+NOTE: the first app is the name of your master file, like main, app, or so
+
 
