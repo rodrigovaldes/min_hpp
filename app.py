@@ -19,8 +19,6 @@ app = Flask(__name__, template_folder='templates')
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-scheduler = APScheduler()
-
 
 @app.route('/')
 def index():
@@ -48,16 +46,18 @@ class Card(db.Model):
     min_transactions = db.Column(db.Integer)
 
 if __name__ == '__main__':
-   
-   # scheduler.add_job(func=print_message, trigger='interval', seconds=2, id='printer')
-   scheduler.add_job(func=print_message,
-                     trigger='cron',
-                     day_of_week='mon-sun',
-                     hour=15,
-                     minute=27,
-                     id='printer')
-   scheduler.start()
 
-   # app.run(debug=False, host='0.0.0.0', use_reloader=False) ## USE RELOADER?
-   app.run(debug=False, host='0.0.0.0')
+    scheduler = APScheduler()
+   
+    scheduler.add_job(func=print_message, trigger='interval', seconds=2, id='printer')
+#   scheduler.add_job(func=print_message,
+#                      trigger='cron',
+#                      day_of_week='mon-sun',
+#                      hour=21,
+#                      minute=50,
+#                      id='printer')
+    scheduler.start()
+
+    # app.run(debug=False, host='0.0.0.0', use_reloader=False) ## USE RELOADER?
+    app.run(debug=False, host='0.0.0.0')
    
