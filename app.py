@@ -20,6 +20,17 @@ app.config['SQLALCHEMY_DATABASE_URI'] = uri
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+# Configure the scheduler
+scheduler = APScheduler()
+scheduler.add_job(func=print_message, trigger='interval', seconds=2, id='printer')
+# scheduler.add_job(func=print_message,
+#                     trigger='cron',
+#                     day_of_week='mon-sun',
+#                     hour=21,
+#                     minute=50,
+#                     id='printer')
+scheduler.start()
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -46,18 +57,6 @@ class Card(db.Model):
     min_transactions = db.Column(db.Integer)
 
 if __name__ == '__main__':
-
-    scheduler = APScheduler()
-   
-    scheduler.add_job(func=print_message, trigger='interval', seconds=2, id='printer')
-#   scheduler.add_job(func=print_message,
-#                      trigger='cron',
-#                      day_of_week='mon-sun',
-#                      hour=21,
-#                      minute=50,
-#                      id='printer')
-    scheduler.start()
-
     # app.run(debug=False, host='0.0.0.0', use_reloader=False) ## USE RELOADER?
     app.run(debug=False, host='0.0.0.0')
    
