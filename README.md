@@ -54,5 +54,7 @@ if app.debug == False:
     # configure the scheduler
 ```
 
-More information here [https://github.com/viniciuschiele/flask-apscheduler/issues/139]
+The solution may be to add preload to the Procfile, like this:
+`web: gunicorn app:app --preload`
 
+More information here [https://github.com/viniciuschiele/flask-apscheduler/issues/139]
