@@ -31,19 +31,6 @@ scheduler.add_job(func=print_message, trigger='interval', seconds=5, id='printer
 #                     id='printer')
 scheduler.start()
 
-
-# if not app.debug:
-#     # Configure the scheduler
-#     scheduler = APScheduler()
-#     scheduler.add_job(func=print_message, trigger='interval', seconds=5, id='printer')
-#     # scheduler.add_job(func=print_message,
-#     #                     trigger='cron',
-#     #                     day_of_week='mon-sun',
-#     #                     hour=21,
-#     #                     minute=50,git
-#     #                     id='printer')
-#     scheduler.start()
-
 @app.route('/')
 def index():
     return render_template('index.html')
